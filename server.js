@@ -1,6 +1,7 @@
-var express = require('express')
-var app = express()
-var chalk = require('chalk')
+const express = require('express')
+const app = express()
+const chalk = require('chalk')
+const routes = require('./src/routes')
 
 const logRequestStart = (req, res, next) => {
 	console.info(
@@ -38,39 +39,7 @@ app.use((req, res, next) => {
 	next()
 })
 
-app.get('/example-story', (req, res, next) => {
-	res.json({
-		titles: ['Introduction', "A spider's uncle", 'How many ducks do YOU see?'],
-		chapters: [
-			"When I was just a boy, living a boy's life in New Jersey...",
-			"I don't know if I should be saying this, but at this point I may as well. I have an arachnid for a niece.",
-			"That's the funny thing about ducks isn't it? Some of them might be underwater!"
-		]
-	})
-})
-
-app.get('/query-stuff', (req, res, next) => {
-	const response = req.query.keys
-		? ['bible', 'tree', 'oscar'].map(key => {
-				if (req.query.keys.includes(key)) {
-					switch (key) {
-						case 'bible':
-							return 'My father was a disc jockey'
-						case 'tree':
-							return "For God's sake! Get down!"
-						default:
-							return "I wouldn't ask that if I were you"
-					}
-				}
-				return 'Ew'
-		  })
-		: null
-	res.json(response)
-})
-
-app.get('/url', (req, res, next) => {
-	res.json(['Tony', 'Lisa', 'Michael', 'Ginger', 'Food'])
-})
+app.use('', routes)
 
 app.listen(3001, () => {
 	console.log('Server running on port 3001')
