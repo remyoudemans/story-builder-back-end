@@ -24,6 +24,7 @@
 	"homepage": "https://github.com/remyoudemans/story-builder-back-end#readme",
 	"dependencies": {
 		"chalk": "^2.4.1",
+		"cors": "^2.8.5",
 		"express": "^4.16.3"
 	}
 }
